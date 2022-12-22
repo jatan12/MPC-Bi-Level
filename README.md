@@ -15,7 +15,7 @@ cd MPC-Bi-Level
 2. Create a conda environment and install the dependencies:
 
 ```
-conda create -n Bi-Level python=3.8
-conda activate Bi-Level
+conda create -n bilevel python=3.8
+conda activate bilevel
 pip install -r requirements.txt
 ```
