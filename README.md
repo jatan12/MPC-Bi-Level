@@ -25,8 +25,10 @@ pip install -r requirements.txt
 
 ![Eval](https://user-images.githubusercontent.com/38403732/209851177-1d56bef3-8e77-4452-a9d1-f1a5c80f2260.png)
 
+### MPC Baselines
+
 ```
-python main.py 
+python baseline_vanilla.py --episodes 50 --density 3.0 --four_lane True --record False --render False
 ```
 
 ## Learning Good Initialization Distribution
