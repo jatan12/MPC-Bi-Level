@@ -19,7 +19,7 @@ conda create -n bilevel python=3.8
 conda activate bilevel
 pip install -r requirements.txt
 ```
-3. Download [CVAE Initialization Models](https://drive.google.com/file/d/19JP3UuHlVCR6XZB9mB5krZNmJXttPvvL/view?usp=share_link) and extract the zip file to the Weights directory. 
+3. Download [CVAE Initialization Models](https://drive.google.com/file/d/19JP3UuHlVCR6XZB9mB5krZNmJXttPvvL/view?usp=share_link) and extract the zip file to the weights directory. 
 
 ## Reproducing our main experimental results
 
