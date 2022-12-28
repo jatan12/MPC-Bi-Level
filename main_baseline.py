@@ -8,7 +8,7 @@ from gym.wrappers import RecordVideo
 parser = argparse.ArgumentParser()
 parser.add_argument("--baseline", type=str, choices=['vanilla', 'grid', 'random', 'batch'], default="vanilla", help="MPC baselines")
 parser.add_argument("--episodes", type=int, default=50, help="select number of episodes")
-parser.add_argument("--density",  type=float, default=3.0, help="selct vehicle density 1 to 3")
+parser.add_argument("--density",  type=float, choices=[1.0, 1.5, 2.5, 3.0], default=3.0, help="Vehicle density")
 parser.add_argument("--four_lane", type=bool, default=True, help="Use 4 or 2 lanes")
 parser.add_argument("--record", type=bool, default=False, help="record environment")
 parser.add_argument("--render", type=bool, default=False, help="render the environment")
