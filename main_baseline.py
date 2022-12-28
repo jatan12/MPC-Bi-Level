@@ -3,11 +3,10 @@ import numpy as np
 import gym
 import time
 from utils.env_config import env_kwargs
-from expert_mpc.policy_vanilla import ExpertPolicy
 from gym.wrappers import RecordVideo
-import highway_env
 
 parser = argparse.ArgumentParser()
+parser.add_argument("--baseline", type=str, choices=['vanilla', 'grid', 'random', 'batch'], default="vanilla", help="MPC baselines")
 parser.add_argument("--episodes", type=int, default=50, help="select number of episodes")
 parser.add_argument("--density",  type=float, default=3.0, help="selct vehicle density 1 to 3")
 parser.add_argument("--four_lane", type=bool, default=True, help="Use 4 or 2 lanes")
@@ -15,6 +14,7 @@ parser.add_argument("--record", type=bool, default=False, help="record environme
 parser.add_argument("--render", type=bool, default=False, help="render the environment")
 
 args = parser.parse_args()
+baseline = args.baseline
 n_episodes = args.episodes
 four_lane_bool = args.four_lane
 if four_lane_bool: lane_count = 4
@@ -23,12 +23,22 @@ env_density = args.density
 record_bool = args.record
 render_bool = args.render
 
-
 # Deisred Velocity
 v_des = 20
 
-# Initializing the policy
-expert = ExpertPolicy()
+# Initializing the baseline policy
+if baseline == "vanilla":
+    from expert_mpc.policy_vanilla import ExpertPolicy
+    expert = ExpertPolicy()
+elif baseline == "grid":
+    from expert_mpc.policy_grid import ExpertPolicy
+    expert = ExpertPolicy()
+elif baseline == "random":
+    from expert_mpc.policy_random import ExpertPolicy
+    expert = ExpertPolicy()
+else:
+    from expert_mpc.policy_batch import ExpertPolicy
+    expert = ExpertPolicy()
 
 # Environment name
 env_name = 'highway-v0'
@@ -89,5 +99,5 @@ if __name__ == "__main__":
         collision_rate = collisions / num_episodes      
         print('Average Collision Rate: ' + str(collision_rate))
         print(f"Average Speed: {np.average(avg_speed)}")
-        np.savez('./results/vanilla_eval.npz', collisions=np.array([collision_rate]), avg_speeds=np.array(avg_speed))
+        np.savez(f'./results/{baseline}_stat.npz', collisions=np.array([collision_rate]), avg_speeds=np.array(avg_speed))
     print('Elapsed' + str(time.time() - start))

@@ -1,11 +1,12 @@
 import numpy as np
 import jax.numpy as jnp
-from expert_mpc.expert_vanilla import batch_opt_nonhol
+from expert_mpc.expert_batch import batch_opt_nonhol
 
 class ExpertPolicy(batch_opt_nonhol):
     """
     Expert deterministic policy running the MPC
     """
+
     def __init__(self):
         super().__init__()
         num = 100
@@ -21,15 +22,14 @@ class ExpertPolicy(batch_opt_nonhol):
         self.s_lane = jnp.zeros((num_batch, 2*num))
    
     def predict(self, obs, ax, ay, v_des):
-        
         x = 0
         y = 0
         ub = obs[0]
         lb = obs[1]
         vx = obs[2]
         vy = obs[3]
+
         initial_state = jnp.hstack((x, y, vx, vy, ax, ay))
-        
         x_obs_temp = obs[5::5]
         y_obs_temp = obs[6::5]
         vx_obs = obs[7::5]
