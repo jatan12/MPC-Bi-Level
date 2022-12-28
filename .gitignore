@@ -2,3 +2,5 @@
 ./highway_env/__pycache__
 ./utils/__pycache__
 __pycache__
+./weights/cvae_ddn_four_lane.pth
+./weights/cvae_ddn_two_lane.pth

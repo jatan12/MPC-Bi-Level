@@ -4,9 +4,10 @@ import gym
 import time
 from utils.env_config import env_kwargs
 from gym.wrappers import RecordVideo
+from optimal_param_cvae import get_params
+from expert_mpc.policy_bilevel import ExpertPolicy
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--baseline", type=str, choices=['vanilla', 'grid', 'random', 'batch'], default="vanilla", help="MPC baselines")
 parser.add_argument("--episodes", type=int, default=50, help="select number of episodes")
 parser.add_argument("--density",  type=float, choices=[1.0, 1.5, 2.5, 3.0], default=3.0, help="Vehicle density")
 parser.add_argument("--four_lane", type=bool, default=True, help="Use 4 or 2 lanes")
@@ -14,40 +15,34 @@ parser.add_argument("--record", type=bool, default=False, help="record environme
 parser.add_argument("--render", type=bool, default=False, help="render the environment")
 
 args = parser.parse_args()
-baseline = args.baseline
 n_episodes = args.episodes
 four_lane_bool = args.four_lane
-if four_lane_bool: lane_count = 4
-else: lane_count = 2
 env_density = args.density
 record_bool = args.record
 render_bool = args.render
 
-# Deisred Velocity
+if four_lane_bool: 
+    lane_count = 4
+    Wandb, BN = get_params(four_lane=True) # Trained Model Parameters
+    inp_mean, inp_std = -1.5896661, 38.1705 # Normalization Constants
+else: 
+    lane_count = 2
+    Wandb, BN = get_params(four_lane=False) # Trained Model Parameters
+    inp_mean, inp_std = 11.051574, 28.63855 # Normalization Constants
+
+# Desired Velocity
 v_des = 20
 
-# Initializing the baseline policy
-if baseline == "vanilla":
-    from expert_mpc.policy_vanilla import ExpertPolicy
-    expert = ExpertPolicy()
-elif baseline == "grid":
-    from expert_mpc.policy_grid import ExpertPolicy
-    expert = ExpertPolicy()
-elif baseline == "random":
-    from expert_mpc.policy_random import ExpertPolicy
-    expert = ExpertPolicy()
-else:
-    from expert_mpc.policy_batch import ExpertPolicy
-    expert = ExpertPolicy()
+# Initializing MPC-Bi-Level Policy
+expert = ExpertPolicy(Wandb, BN, inp_mean, inp_std, use_nn=True)
 
-# Environment name
+# Environment Name
 env_name = 'highway-v0'
 
 # Obstacle Velocity
-params = [15]
+params = [15] 
 
-# Environment Density
-density_dict = {params[0] : env_density}
+density_dict = {    params[0] : env_density}
 
 rec_video = record_bool
 if __name__ == "__main__":
@@ -58,14 +53,14 @@ if __name__ == "__main__":
         collisions = 0
         speeds = []
         avg_speed = []
-        env_kwargs['config']['lanes_count'] = lane_count
+        env_kwargs['config']['lanes_count'] = lane_count 
         env_kwargs['config']['speed_limit'] = param
         env_kwargs['config']['vehicles_density'] = density_dict[param]
         env = gym.make(env_name, **env_kwargs)
         if rec_video:
-            env = RecordVideo(env, video_folder=f"./videos/{baseline}/",
+            env = RecordVideo(env, video_folder="./videos/bilevel/",
                           episode_trigger=lambda e: True)
-            env.unwrapped.set_record_video_wrapper(env)        
+            env.unwrapped.set_record_video_wrapper(env)
         env.seed(42)
         obs = env.reset()
         cnt = 0
@@ -85,7 +80,7 @@ if __name__ == "__main__":
                     avg_speed.append(np.sum(speeds) / len(speeds))
                 else:
                     collisions += 1
-                    avg_speed.append(0.)                
+                    avg_speed.append(0.)            
                 print("-" * 100)
                 print(f"Episode: {cnt}")
                 print(f"Collisions: {collisions}")
@@ -96,8 +91,8 @@ if __name__ == "__main__":
                 print("-" * 100)
                 speeds = []
                 obs = env.reset()
-        collision_rate = collisions / num_episodes      
+        collision_rate = collisions / num_episodes       
         print('Average Collision Rate: ' + str(collision_rate))
         print(f"Average Speed: {np.average(avg_speed)}")
-        np.savez(f'./results/{baseline}_stat.npz', collisions=np.array([collision_rate]), avg_speeds=np.array(avg_speed))
-    print('Elapsed' + str(time.time() - start))
+        np.savez('./results/bilevel_stat.npz', collisions=np.array([collision_rate]), avg_speeds=np.array(avg_speed))
+    print('Elapsed: ' + str(time.time() - start))
