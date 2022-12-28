@@ -23,7 +23,7 @@ pip install -r requirements.txt
 
 ## Reproducing our main experimental results
 
-![Full Scenarios](https://user-images.githubusercontent.com/38403732/209849602-bda62e58-2949-4873-bb44-9095eacf851d.png)
+![Eval](https://user-images.githubusercontent.com/38403732/209851177-1d56bef3-8e77-4452-a9d1-f1a5c80f2260.png)
 
 ```
 python main.py 
@@ -31,7 +31,7 @@ python main.py
 
 ## Learning Good Initialization Distribution
 
-![Training](https://user-images.githubusercontent.com/38403732/209849729-7c21c549-b118-4dad-abda-f375e22fbba4.png)
+![CVAE](https://user-images.githubusercontent.com/38403732/209850972-7171caa7-6aff-48ab-aa32-dbdf5f5a1ffc.png)
 
 ## Citation
 
