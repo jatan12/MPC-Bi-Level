@@ -27,8 +27,15 @@ pip install -r requirements.txt
 
 ### MPC Baselines
 
+To run a baseline (vanilla, grid, random, batch):
+
 ```
-python baseline_vanilla.py --episodes 50 --density 3.0 --four_lane True --record False --render False
+python main_baseline.py --baseline $(select) --density $(select) --four_lane $(True else False for two lane)
+```
+**Note**: Default number of episodes is 50. To record / render the environment:
+
+```
+python main_baseline.py --episodes $(select) --record True --render True
 ```
 
 ## Learning Good Initialization Distribution
