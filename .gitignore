@@ -1,6 +1,9 @@
 ./expert_mpc/__pycache__
 ./highway_env/__pycache__
 ./utils/__pycache__
+./dataset/train.npy
+./dataset/test.npy
+ddn/
 __pycache__
 ./weights/cvae_ddn_four_lane.pth
 ./weights/cvae_ddn_two_lane.pth
