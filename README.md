@@ -57,7 +57,7 @@ git clone https://github.com/anucvml/ddn.git
 
 2. Download the [training dataset](https://drive.google.com/file/d/1tfXn11uwGwqS23hOH1oKlfIVJya9-hvE/view?usp=share_link) and extract the zip file to the dataset directory. 
 
-3. Notebook
+3. The training example is shown in the [Jupyter Notebook](https://github.com/jatan12/MPC-Bi-Level/blob/main/Beta%20cVAE%20DDN%20Training.ipynb) and can also be viewed using [Notebook Viewer](https://nbviewer.org/github/jatan12/MPC-Bi-Level/blob/main/Beta%20cVAE%20DDN%20Training.ipynb).
 
 ## Citation
 
