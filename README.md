@@ -48,7 +48,7 @@ python main_baseline.py --episodes $(select) --record True --render True
 
 ![CVAE](https://user-images.githubusercontent.com/38403732/209850972-7171caa7-6aff-48ab-aa32-dbdf5f5a1ffc.png)
 
-1. Clone the Deep Declarative Networks repository:
+1. Clone the [Deep Declarative Networks](https://arxiv.org/abs/1909.04866) repository:
 
 ```
 cd MPC-Bi-Level
