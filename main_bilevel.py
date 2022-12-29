@@ -4,7 +4,7 @@ import gym
 import time
 from utils.env_config import env_kwargs
 from gym.wrappers import RecordVideo
-from optimal_param_cvae import get_params
+from extract_param_cvae import get_params
 from expert_mpc.policy_bilevel import ExpertPolicy
 
 parser = argparse.ArgumentParser()
