@@ -28,7 +28,7 @@ pip install -r requirements.txt
 ### MPC-Bi-Level
 
 ```
-python main_bilevel.py --density $(select) --four_lane $(True else False for two lane)
+python main_bilevel.py --density $(select) --four_lane $(True / False for two lane)
 ```
 
 ### MPC Baselines
@@ -36,7 +36,7 @@ python main_bilevel.py --density $(select) --four_lane $(True else False for two
 To run a baseline (vanilla, grid, random, batch):
 
 ```
-python main_baseline.py --baseline $(select) --density $(select) --four_lane $(True else False for two lane)
+python main_baseline.py --baseline $(select) --density $(select) --four_lane $(True / False for two lane)
 ```
 **Note**: Default number of episodes is 50. To record / render the environment:
 
