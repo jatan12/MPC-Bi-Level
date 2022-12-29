@@ -19,7 +19,7 @@ conda create -n bilevel python=3.8
 conda activate bilevel
 pip install -r requirements.txt
 ```
-3. Download [CVAE Initialization Models](https://drive.google.com/file/d/19JP3UuHlVCR6XZB9mB5krZNmJXttPvvL/view?usp=share_link) and extract the zip file to the weights directory. 
+3. Download [CVAE Initialization Models](https://drive.google.com/file/d/1nOQq6EGnEdUtq1nuBOqsYGJwmw6M47dJ/view?usp=share_link) and extract the zip file to the weights directory. 
 
 ## Reproducing our main experimental results
 
@@ -47,6 +47,17 @@ python main_baseline.py --episodes $(select) --record True --render True
 ## Learning Good Initialization Distribution
 
 ![CVAE](https://user-images.githubusercontent.com/38403732/209850972-7171caa7-6aff-48ab-aa32-dbdf5f5a1ffc.png)
+
+1. Clone the Deep Declarative Networks repository:
+
+```
+cd MPC-Bi-Level
+git clone https://github.com/anucvml/ddn.git
+```
+
+2. Download the [training dataset](https://drive.google.com/file/d/1tfXn11uwGwqS23hOH1oKlfIVJya9-hvE/view?usp=share_link) and extract the zip file to the dataset directory. 
+
+3. Notebook
 
 ## Citation
 
