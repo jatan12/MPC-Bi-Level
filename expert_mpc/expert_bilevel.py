@@ -751,7 +751,7 @@ class batch_opt_nonhol():
 
 			neural_output_projection = neural_output_batch[idx_ellite_projection[0:self.ellite_num_projection]]
 
-			cost_batch = self.compute_cost(y_ellite_projection, res_ellite_projection, xdot_ellite_projection, ydot_ellite_projection, xddot_ellite_projection, yddot_ellite_projection, y_lane_lb, y_lane_ub, v_des, steering_ellite_projection, d_v_ellite_projection, x_ellite_projection, velocity_scaling)
+			cost_batch = self.compute_cost(res_ellite_projection, xdot_ellite_projection, ydot_ellite_projection, v_des, steering_ellite_projection, velocity_scaling)
 
 			neural_output_ellite, idx_ellite = self.compute_ellite_samples(cost_batch, neural_output_projection)
 			

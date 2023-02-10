@@ -1,6 +1,7 @@
 import argparse
 import numpy as np
 import gym
+import highway_env
 import time
 from utils.env_config import env_kwargs
 from gym.wrappers import RecordVideo
