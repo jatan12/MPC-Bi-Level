@@ -51,9 +51,9 @@ class Encoder(nn.Module):
 			nn.ReLU()
 		)
 		
-		# Mean and Variance
+		# Mean and Std
 		self.mu = nn.Linear(256, z_dim)
-		self.var = nn.Linear(256, z_dim)
+		self.std = nn.Linear(256, z_dim)
 
 		# Softplus activation
 		self.softplus = nn.Softplus()
@@ -61,8 +61,8 @@ class Encoder(nn.Module):
 	def forward(self, x):
 		out = self.encoder(x)
 		mu = self.mu(out)
-		var = self.var(out)
-		return mu, self.softplus(var)
+		std = self.std(out)
+		return mu, self.softplus(std)
 	
 # Decoder Architecture
 class Decoder(nn.Module):
@@ -135,13 +135,13 @@ class Beta_cVAE(nn.Module):
 	# Encoder: P_phi(z | x, y)
 	def encode(self, x, y):
 		inputs = torch.cat([x, y], dim = 1)
-		mu, var = self.encoder(inputs)        
-		return mu, var
+		mu, std = self.encoder(inputs)        
+		return mu, std
 
 	# Reparametrization Trick
-	def reparameterize(self, mu, var):
+	def reparameterize(self, mu, std):
 		eps = torch.randn_like(mu, device=device)
-		return mu + var * eps
+		return mu + std * eps
 
 	# Decoder: P_theta(y* | z, x) where y* is the optimal solution of the optimization problem
 	def decode(self, z, x, init_state_ego):
@@ -257,11 +257,11 @@ class Beta_cVAE(nn.Module):
 		# Normalize input
 		inp_norm = (inp - self.inp_mean) / self.inp_std
 		
-		# Mu & Variance
-		mu, var = self.encode(inp_norm, traj_gt)
+		# Mu & Std
+		mu, std = self.encode(inp_norm, traj_gt)
 				
 		# Sample from z -> Reparameterized 
-		z = self.reparameterize(mu, var)
+		z = self.reparameterize(mu, std)
 		
 		# Decode y
 		y_star = self.decode(z, inp_norm, init_state_ego)
@@ -270,7 +270,7 @@ class Beta_cVAE(nn.Module):
 		# Collision cost
 		col_cost = self.compute_col_cost(inp, y_star, traj_sol, Pdot, Pddot, y_ub, y_lb)
 				
-		return mu, var, traj_sol, col_cost
+		return mu, std, traj_sol, col_cost
 	
 # Optimization Layer
 class BatchOpt_DDN(LinEqConstDeclarativeNode):
