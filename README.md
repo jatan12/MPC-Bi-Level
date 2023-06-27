@@ -1,8 +1,8 @@
 # Bi-Level Optimization Augmented with Conditional Variational Autoencoder for Autonomous Driving in Dense Traffic
 
-This repository contains the source code to reproduce the experiments in our RAL submission [Bi-Level Optimization Augmented with Conditional Variational Autoencoder for Autonomous Driving in Dense Traffic](https://arxiv.org/abs/2212.02224).
+This repository contains the source code to reproduce the experiments in our IEEE CASE 2023 paper [Bi-Level Optimization Augmented with Conditional Variational Autoencoder for Autonomous Driving in Dense Traffic](https://arxiv.org/abs/2212.02224).
 
-![Pipeline](https://user-images.githubusercontent.com/38403732/209846154-865812a0-e1c4-474c-ba78-8dab36c4ac21.png)
+![CASE2023_Overview_page-0001](https://github.com/jatan12/MPC-Bi-Level/assets/38403732/8be3088a-bd03-4acb-b83b-6298b57417ce)
 
 ## Getting Started
 
@@ -46,7 +46,7 @@ python main_baseline.py --episodes ${select} --record True --render True
 
 ## Learning Good Initialization Distribution
 
-![CVAE](https://user-images.githubusercontent.com/38403732/209850972-7171caa7-6aff-48ab-aa32-dbdf5f5a1ffc.png)
+![CASE2023 Pipeline_page-0001](https://github.com/jatan12/MPC-Bi-Level/assets/38403732/ee172b4c-f4a3-4153-85f5-5aa4e03b974a)
 
 1. Clone the [Deep Declarative Networks](https://arxiv.org/abs/1909.04866) repository:
 
