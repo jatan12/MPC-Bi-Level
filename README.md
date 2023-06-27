@@ -59,7 +59,7 @@ git clone https://github.com/anucvml/ddn.git
 
 3. The training example is shown in the [Jupyter Notebook](https://github.com/jatan12/MPC-Bi-Level/blob/main/Beta%20cVAE%20DDN%20Training.ipynb) and can also be viewed using [Notebook Viewer](https://nbviewer.org/github/jatan12/MPC-Bi-Level/blob/main/Beta%20cVAE%20DDN%20Training.ipynb).
 
-## Citation
+<!--- ## Citation
 
 If you found this repository useful, please consider citing our work:
 
@@ -74,4 +74,4 @@ If you found this repository useful, please consider citing our work:
   year = {2022},
   copyright = {Creative Commons Attribution 4.0 International}
 }
-```
+```-->
